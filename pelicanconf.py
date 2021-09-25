@@ -32,3 +32,18 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
+
+THEME_TEMPLATES_OVERRIDES = ['template_overrides']
+
+PLUGINS = ['photos']
+
+# Options for Photos, see https://github.com/pelican-plugins/photos
+PHOTO_LIBRARY = "~/Nextcloud/inbox/photos"
+PHOTO_GALLERY = (1024, 768, 80)
+PHOTO_ARTICLE = (760, 506, 80)
+PHOTO_THUMB = (192, 144, 60)
+PHOTO_SQUARE_THUMB = False
+PHOTO_RESIZE_JOBS = 5
+PHOTO_WATERMARK = True
+PHOTO_WATERMARK_TEXT = SITENAME
+PHOTO_WATERMARK_IMG = ''
