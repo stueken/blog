@@ -44,7 +44,16 @@ $('.gallery').magnificPopup({
 				return (item.el.attr('caption').replace(/\\n/g, '<br />') +
 					'<small>' + item.el.attr('title') + ' - ' + item.el.attr('exif') + '</small>');
 			}
-		return item.el.attr('title') + '<small>' + item.el.attr('exif') + '</small>';
+			if (item.el.attr('caption')) {
+				return (item.el.attr('caption').replace(/\\n/g, '<br />') +
+					'<small>' + item.el.attr('title') + '</small>');
+			}
+			if (item.el.attr('exif')) {
+				return ('<br />' +
+					'<small>' + item.el.attr('title') + ' - ' + item.el.attr('exif') + '</small>');
+			}
+		return ('<br />' +
+			'<small>' + item.el.attr('title') + '</small>');
 		}
 	},
 	removalDelay: 300, // Delay in milliseconds before popup is removed
