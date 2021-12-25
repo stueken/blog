@@ -35,6 +35,12 @@ DEFAULT_PAGINATION = 10
 
 THEME_TEMPLATES_OVERRIDES = ['template_overrides']
 
+# Integrates several typographical improvements into the generated HTML
+TYPOGRIFY = True
+TYPOGRIFY_IGNORE_TAGS = []
+TYPOGRIFY_DASHES = 'default'
+
+
 PLUGINS = ['photos']
 
 # Options for Photos, see https://github.com/pelican-plugins/photos
