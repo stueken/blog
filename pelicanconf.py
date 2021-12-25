@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
+from dotenv import dotenv_values
+
+# Create a dict with the values from .env file
+ENV = dotenv_values('.env')
 
 AUTHOR = 'Norbert Stüken'
 SITENAME = 'blog.nrbrt.com'
@@ -44,7 +48,7 @@ TYPOGRIFY_DASHES = 'default'
 PLUGINS = ['photos']
 
 # Options for Photos, see https://github.com/pelican-plugins/photos
-PHOTO_LIBRARY = "~/Nextcloud/inbox/photos"
+PHOTO_LIBRARY = ENV['PHOTO_LIBRARY']
 PHOTO_GALLERY = (1024, 768, 80)
 PHOTO_ARTICLE = (760, 506, 80)
 PHOTO_THUMB = (192, 144, 60)
