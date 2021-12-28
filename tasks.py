@@ -28,7 +28,7 @@ CONFIG = {
     'ssh_user': 'nrbrt',
     'ssh_host': 'nrbrt.com',
     'ssh_port': '22',
-    'ssh_path': '/home/nrbrt/nrbrt/blog',
+    'ssh_path': '~/nrbrt/blog',
     # Host and port for `serve`
     'host': 'localhost',
     'port': 8000,

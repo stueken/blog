@@ -1,5 +1,6 @@
 /.env
 /.python-version
 
+/cache/
 /content/
 /output/
