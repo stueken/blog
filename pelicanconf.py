@@ -46,6 +46,18 @@ TYPOGRIFY_DASHES = 'default'
 
 
 PLUGINS = ['photos']
+# URL settings
+# ------------
+ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
+ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
+PAGE_URL = 'pages/{slug}/'
+PAGE_SAVE_AS = 'pages/{slug}/index.html'
+AUTHOR_URL = 'author/{slug}'
+AUTHOR_SAVE_AS = 'author/{slug}/index.html'
+CATEGORY_URL = 'category/{slug}'
+CATEGORY_SAVE_AS = 'category/{slug}/index.html'
+TAG_URL = 'tag/{slug}'
+TAG_SAVE_AS = 'tag/{slug}/index.html'
 
 # Options for Photos, see https://github.com/pelican-plugins/photos
 PHOTO_LIBRARY = ENV['PHOTO_LIBRARY']
