@@ -1,0 +1,10 @@
+@import url("main.css");
+
+    .post-info {
+        margin-bottom: 8ex;
+    }
+
+    #posts-list footer {
+        margin-right: 4ex;
+        margin-bottom: 8ex;
+    }

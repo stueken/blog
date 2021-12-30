@@ -76,8 +76,8 @@ DEFAULT_LANG = 'en'
 # Themes
 # ------
 THEME = 'notmyidea'
-THEME_TEMPLATES_OVERRIDES = ['template_overrides']
-# CSS_FILE = 'wide.css'
+THEME_TEMPLATES_OVERRIDES = ['template_overrides']  # relative to blog root dir
+CSS_FILE = 'custom.css'
 SITESUBTITLE = 'A personal blog'
 # TODO should be the site repository, create open source repo
 # GITHUB_URL = 'https://github.com/stueken'
