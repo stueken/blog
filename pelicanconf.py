@@ -11,6 +11,7 @@ PATH = 'content'
 PLUGINS = ['photos']
 SITENAME = 'blog.nrbrt.com'
 SITEURL = ''
+STATIC_PATHS = ['images', 'theme']  # relative to PATH
 
 # Integrates several typographical improvements into the generated HTML
 TYPOGRIFY = True
