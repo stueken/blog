@@ -1,22 +1,94 @@
-{% extends '!theme/base.html' %}
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
+<head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
 
-{% block custom_css %}
-{# For this to work, add block custom_css just before the main css file
-inside the extended base.html template #}
-{% if (article and article.photo_gallery) or (articles_page and articles_page.object_list[0].photo_gallery) %}
+        {# Add Magnific Popup CSS file before main css file #}
+        {% if (article and article.photo_gallery) or (articles_page and articles_page.object_list[0].photo_gallery) %}
 
-{# Magnific Popup core CSS file #}
-<link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/magnific-popup/magnific-popup.css">
+            <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/magnific-popup/magnific-popup.css">
+        {% endif %}
+        {# End Add #}
 
-{% endif %}
+        <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/{{ CSS_FILE }}" />
+        {% if FEED_ALL_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        {% endif %}
+        {% if FEED_ALL_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+        {% block extra_head %}{% endblock extra_head %}
+        {% endblock head %}
+</head>
 
-{% endblock custom_css %}
+<body id="index" class="home">
+{% include 'github.html' %}
+        <header id="banner" class="body">
+                <h1><a href="{{ SITEURL }}/">{{ SITENAME }}{% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a></h1>
+                <nav><ul>
+                {% for title, link in MENUITEMS %}
+                    <li><a href="{{ link }}">{{ title }}</a></li>
+                {% endfor %}
+                {% if DISPLAY_PAGES_ON_MENU -%}
+                {% for pg in pages %}
+                    <li{% if pg == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ pg.url }}">{{ pg.title }}</a></li>
+                {% endfor %}
+                {% endif %}
+                {% if DISPLAY_CATEGORIES_ON_MENU -%}
+                {% for cat, null in categories %}
+                    <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                {% endfor %}
+                {% endif %}
+                </ul></nav>
+        </header><!-- /#banner -->
+        {% block content %}
+        {% endblock %}
+        <section id="extras" class="body">
+        {% if LINKS %}
+                <div class="blogroll">
+                        <h2>{{ LINKS_WIDGET_NAME | default('links') }}</h2>
+                        <ul>
+                        {% for name, link in LINKS %}
+                            <li><a href="{{ link }}">{{ name }}</a></li>
+                        {% endfor %}
+                        </ul>
+                </div><!-- /.blogroll -->
+        {% endif %}
+        {% if SOCIAL or FEED_ALL_ATOM or FEED_ALL_RSS %}
+                <div class="social">
+                        <h2>{{ SOCIAL_WIDGET_NAME | default('social') }}</h2>
+                        <ul>
+                            {% if FEED_ALL_ATOM %}
+                            <li><a href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            {% endif %}
+                            {% if FEED_ALL_RSS %}
+                            <li><a href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate">rss feed</a></li>
+                            {% endif %}
 
+                        {% for name, link in SOCIAL %}
+                            <li><a href="{{ link }}">{{ name }}</a></li>
+                        {% endfor %}
+                        </ul>
+                </div><!-- /.social -->
+        {% endif %}
+        </section><!-- /#extras -->
 
-{% block custom_js %}
-{# For this to work, add block custom_js just before the closing body tag 
-inside the extended base.html template #}
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
 
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+{% include 'analytics.html' %}
+{% include 'disqus_script.html' %}
+
+{# Add jQuery and Magnific Popup JS file before closing body tag #}
 {% if (article and article.photo_gallery) or (articles_page and articles_page.object_list[0].photo_gallery) %}
 
 {# jQuery 1.7.2+ or Zepto.js 1.0+ #}
@@ -28,37 +100,39 @@ inside the extended base.html template #}
 <script>
 $('.gallery').magnificPopup({
     // main options
-	delegate: 'a', // the selector for gallery item
-	type: 'image',
-	gallery: {
-		// options for gallery
-		enabled: true,
-		navigateByImgClick: true,
-		preload: [1,2],
-	},
-	image: {
-		// options for image content type
-		titleSrc: function(item) {
-			if (item.el.attr('caption') && item.el.attr('exif')) {
-				return (item.el.attr('caption').replace(/\\n/g, '<br />') +
-					'<small>' + item.el.attr('title') + ' - ' + item.el.attr('exif') + '</small>');
-			}
-			if (item.el.attr('caption')) {
-				return (item.el.attr('caption').replace(/\\n/g, '<br />') +
-					'<small>' + item.el.attr('title') + '</small>');
-			}
-			if (item.el.attr('exif')) {
-				return ('<br />' +
-					'<small>' + item.el.attr('title') + ' - ' + item.el.attr('exif') + '</small>');
-			}
-		return ('<br />' +
-			'<small>' + item.el.attr('title') + '</small>');
-		}
-	},
-	removalDelay: 300, // Delay in milliseconds before popup is removed
-	mainClass: 'mfp-fade' // Class that is added to popup wrapper and background
+    delegate: 'a', // the selector for gallery item
+    type: 'image',
+    gallery: {
+        // options for gallery
+        enabled: true,
+        navigateByImgClick: true,
+        preload: [1,2],
+    },
+    image: {
+        // options for image content type
+        titleSrc: function(item) {
+            if (item.el.attr('caption') && item.el.attr('exif')) {
+                return (item.el.attr('caption').replace(/\\n/g, '<br />') +
+                    '<small>' + item.el.attr('title') + ' - ' + item.el.attr('exif') + '</small>');
+            }
+            if (item.el.attr('caption')) {
+                return (item.el.attr('caption').replace(/\\n/g, '<br />') +
+                    '<small>' + item.el.attr('title') + '</small>');
+            }
+            if (item.el.attr('exif')) {
+                return ('<br />' +
+                    '<small>' + item.el.attr('title') + ' - ' + item.el.attr('exif') + '</small>');
+            }
+        return ('<br />' +
+            '<small>' + item.el.attr('title') + '</small>');
+        }
+    },
+    removalDelay: 300, // Delay in milliseconds before popup is removed
+    mainClass: 'mfp-fade' // Class that is added to popup wrapper and background
 });
 </script>
 {% endif %}
+{# End Add #}
 
-{% endblock custom_js %}
+</body>
+</html>
