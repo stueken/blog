@@ -3,6 +3,7 @@
 
 /cache/
 /content/*
+!content/example.md
 /content/images/
 !content/theme/
 /output/
