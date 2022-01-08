@@ -79,8 +79,7 @@ THEME = 'notmyidea'
 THEME_TEMPLATES_OVERRIDES = ['template_overrides']  # relative to blog root dir
 CSS_FILE = 'custom.css'
 SITESUBTITLE = 'A personal blog'
-# TODO should be the site repository, create open source repo
-# GITHUB_URL = 'https://github.com/stueken'
+GITHUB_URL = 'https://github.com/stueken/blog'
 
 # Blogroll
 LINKS = (
