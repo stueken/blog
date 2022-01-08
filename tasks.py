@@ -13,6 +13,9 @@ from pelican import main as pelican_main
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
 from pelican.settings import DEFAULT_CONFIG, get_settings_from_file
 
+from pelicanconf import ENV
+
+
 SETTINGS_FILE_BASE = 'pelicanconf.py'
 SETTINGS = {}
 SETTINGS.update(DEFAULT_CONFIG)
@@ -25,10 +28,10 @@ CONFIG = {
     # Output path. Can be absolute or relative to tasks.py. Default: 'output'
     'deploy_path': SETTINGS['OUTPUT_PATH'],
     # Remote server configuration
-    'ssh_user': 'nrbrt',
-    'ssh_host': 'nrbrt.com',
-    'ssh_port': '22',
-    'ssh_path': '~/nrbrt/blog',
+    'ssh_user': ENV['SSH_USER'],
+    'ssh_host': ENV['SSH_HOST'],
+    'ssh_port': ENV['SSH_PORT'],
+    'ssh_path': ENV['SSH_PATH'],
     # Host and port for `serve`
     'host': 'localhost',
     'port': 8000,

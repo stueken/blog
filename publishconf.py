@@ -5,10 +5,11 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
+
 # Basic settings
 # --------------
 # If your site is available via HTTPS, make sure SITEURL begins with https://
-SITEURL = 'https://blog.nrbrt.com'
+SITEURL = ENV['SITEURL']
 # TODO True will rebuild everything and genereate wrongly aligned photos!
 DELETE_OUTPUT_DIRECTORY = False
 

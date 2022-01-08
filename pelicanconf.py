@@ -5,11 +5,12 @@ from dotenv import dotenv_values
 # Create a dict with the values from .env file
 ENV = dotenv_values('.env')
 
+
 # Basic settings
 # --------------
 PATH = 'content'
 PLUGINS = ['photos']
-SITENAME = 'blog.nrbrt.com'
+SITENAME = ENV['SITENAME']
 SITEURL = ''
 STATIC_PATHS = ['images', 'theme']  # relative to PATH
 
@@ -50,7 +51,7 @@ DIRECT_TEMPLATES = ['index', 'categories', 'archives']
 
 # Metadata
 # --------
-AUTHOR = 'Norbert Stüken'
+AUTHOR = ENV['AUTHOR']
 
 # Feed settings
 # -------------
@@ -78,7 +79,7 @@ DEFAULT_LANG = 'en'
 THEME = 'notmyidea'
 THEME_TEMPLATES_OVERRIDES = ['template_overrides']  # relative to blog root dir
 CSS_FILE = 'custom.css'
-SITESUBTITLE = 'A personal blog'
+SITESUBTITLE = ENV['SITESUBTITLE']
 GITHUB_URL = 'https://github.com/stueken/blog'
 
 # Blogroll
@@ -94,7 +95,7 @@ LINKS = (
 SOCIAL = (
     # ('You can add links in your config file', '#'),
     # ('Another social link', '#'),
-    ('GitHub', 'http://github.com/stueken'),
+    ('GitHub', ENV['GITHUB']),
 )
 # LINKS_WIDGET_NAME = 'Blogs I follow'
 # SOCIAL_WIDGET_NAME = 'Connect'
